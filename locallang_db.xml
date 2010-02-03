@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'mn_pagebookmark'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Show Bookmarks</label>
+			<label index="tx_mnpagebookmark_bookmark">Bookmark</label>
+			<label index="tx_mnpagebookmark_bookmark.name">Name</label>
+			<label index="tx_mnpagebookmark_bookmark.user_id">FE-User</label>
+			<label index="tx_mnpagebookmark_bookmark.page_id">Seiten</label>
+			<label index="tx_mnpagebookmark_bookmark.parameter">URL Parameter</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode.I.0">Merken Link</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode.I.1">Bookmark Liste</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode">Bookmark List Mode</label>
+		</languageKey>
+	</data>
+</T3locallang>
