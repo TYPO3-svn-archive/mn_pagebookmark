@@ -59,7 +59,7 @@ class tx_mnpagebookmark_display {
 		
 		
 		$this->conf = $this->piBaseObj->conf;
-		#debug($this->conf[ 'templateFile' ]);
+		
 		$this->template = $GLOBALS['TSFE']->cObj->FileResource( $this->conf[ 'templateFile' ] );
 		
 	}
@@ -118,6 +118,12 @@ class tx_mnpagebookmark_display {
 			foreach ($this->BookmarkListObj->getBookmarkList() as $RootPID =>  $BMObjArr) {
 						
 				$templateBM = $GLOBALS['TSFE']->cObj->getSubpart( $templateBMList, '###BOOKMARK_ENTRY_'.$RootPID.'###');
+				$subpartKey = '###BOOKMARK_ENTRY_'.$RootPID.'###';
+				
+				if(!$templateBM) {
+					$templateBM = $GLOBALS['TSFE']->cObj->getSubpart( $templateBMList, '###BOOKMARK_ENTRY###');
+					$subpartKey = '###BOOKMARK_ENTRY###';
+				}
 				$list = '';			
 				foreach ($BMObjArr as $BMArr2) {
 					foreach ($BMArr2 as $BMObj) {
@@ -129,8 +135,9 @@ class tx_mnpagebookmark_display {
 				}
 				
 				$subpart['###BOOKMARK_COUNT_'.$RootPID.'###'] = $this->BookmarkListObj->getCountBookmarksOfRootPage($RootPID);
+				$subpart['###BOOKMARK_COUNT_ALL###'] = $this->BookmarkListObj->getBookmarkListCount();
 				
-				$subpart['###BOOKMARK_ENTRY_'.$RootPID.'###'] = $list;
+				$subpart[$subpartKey] = $list;
 			}
 		}else{
 			

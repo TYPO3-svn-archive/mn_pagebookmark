@@ -1,28 +1,21 @@
 plugin.tx_mnpagebookmark_pi1{
-templateFile = fileadmin/templates/BOOKINGS/merkzettel.html
-PIDofBookmarkList = 3054
-cookieLifeTime = 99999999
-
-
-storagePID = 3161
-#cookieName = merkzettel
-  
-RootPIDs{
-  34 = 1
-  1496 = 1
-  1751 = 1
-  1769 = 1
-  1787 = 1
-  1805 = 1
-  1823 = 1
-   
-}
-validateBMListOnView{
-  whitDB = 1
-  whitCookie = 1
-}
-formular{
-  TagetPID = 3382
-  MoveToPID = 3382
-}
+	templateFile = EXT:mn_pagebookmark/res/template.html
+	PIDofBookmarkList = {$bookinglist.pid}
+	cookieLifeTime = 99999999
+	
+	
+	storagePID = 2
+	#cookieName = merkzettel
+	  
+	RootPIDs{
+	  1 = 1
+	}
+	validateBMListOnView{
+	  whitDB = 1
+	  whitCookie = 1
+	}
+	formular{
+	  TagetPID = 2
+	  MoveToPID = 2
+	}
 }

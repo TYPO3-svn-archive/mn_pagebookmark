@@ -65,16 +65,18 @@ class tx_mnpagebookmark_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		$this->pi_USER_INT_obj = 1;	// Configuring so caching is not expected. This value means that no cHash params are ever set. We do this, because it's a USER_INT object!
 	
-				
 		$this->init();
-		
-		$this->BMcontroller = t3lib_div::makeInstance( 'tx_mnpagebookmark_controller' );
-		$this->BMcontroller->init( $this );
-		
-		$this->BMcontroller->start( $this->mode );
-		
-		$content = $this->BMcontroller->getContent();
-		
+		if($conf[ 'templateFile' ]){
+			
+			$this->BMcontroller = t3lib_div::makeInstance( 'tx_mnpagebookmark_controller' );
+			$this->BMcontroller->init( $this );
+			
+			$this->BMcontroller->start( $this->mode );
+			
+			$content = $this->BMcontroller->getContent();
+		}else{
+			$content .= 'template file not defined, use "Static Template files to include" in "Include static" '; 		
+		}
 		return $this->pi_wrapInBaseClass($content);
 	}
 	
