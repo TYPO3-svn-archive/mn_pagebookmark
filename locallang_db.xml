@@ -10,11 +10,23 @@
 			<label index="tx_mnpagebookmark_bookmark">Bookmark</label>
 			<label index="tx_mnpagebookmark_bookmark.name">Name</label>
 			<label index="tx_mnpagebookmark_bookmark.user_id">FE-User</label>
+			<label index="tx_mnpagebookmark_bookmark.page_id">Pages</label>
+			<label index="tx_mnpagebookmark_bookmark.parameter">URL Parameter</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode.I.0">Link to bookmark this page</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode.I.1">Bookmark list</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode">Bookmark list Mode</label>
+		</languageKey>
+		
+		<languageKey index="de" type="array">
+			<label index="tt_content.list_type_pi1">Show Bookmarks</label>
+			<label index="tx_mnpagebookmark_bookmark">Bookmark</label>
+			<label index="tx_mnpagebookmark_bookmark.name">Name</label>
+			<label index="tx_mnpagebookmark_bookmark.user_id">FE-User</label>
 			<label index="tx_mnpagebookmark_bookmark.page_id">Seiten</label>
 			<label index="tx_mnpagebookmark_bookmark.parameter">URL Parameter</label>
 			<label index="tt_content.tx_mnpagebookmark_bookmark_mode.I.0">Merken Link</label>
 			<label index="tt_content.tx_mnpagebookmark_bookmark_mode.I.1">Bookmark Liste</label>
-			<label index="tt_content.tx_mnpagebookmark_bookmark_mode">Bookmark List Mode</label>
+			<label index="tt_content.tx_mnpagebookmark_bookmark_mode">Bookmark Listen Modus</label>
 		</languageKey>
 	</data>
 </T3locallang>
