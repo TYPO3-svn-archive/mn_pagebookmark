@@ -18,4 +18,21 @@ plugin.tx_mnpagebookmark_pi1{
 	  TagetPID = 2
 	  MoveToPID = 2
 	}
+	
+	
+	URLparamter {
+		stdWrap.crop = 58|...
+		1 = RECORDS
+		1 {
+				getvar = tx_myext_pi1[test]
+				source = 1
+				tables = tx_myext_test
+				conf.tx_myext_testy = TEXT
+				conf.tx_myext_test.field = name
+				conf.tx_myext_test.wrap = |
+				
+		}
+		
+				
+	}
 }
