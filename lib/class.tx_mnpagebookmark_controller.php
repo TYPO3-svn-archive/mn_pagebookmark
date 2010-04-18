@@ -183,8 +183,6 @@ class tx_mnpagebookmark_controller {
 	function getBookmarkPage_Link(){
 		//tx_mnbookmarklis_display::getLinkToBookmarkPage();
 		
-		$urlParams = $_SERVER['QUERY_STRING'];
-		
 		if($this->isPageBookmarked($GLOBALS['TSFE']->id, urldecode($urlParams))
 			|| $this->isPageBookmarked($GLOBALS['TSFE']->id, urldecode($this->validateAdditionURLParameter( $this->PiBaseObj->piVars['URLParameter'])))
 			){
@@ -194,12 +192,12 @@ class tx_mnpagebookmark_controller {
 													#'submitMode' => 'add', 
 													'submitMode' => self::DELETE_MODE, 
 													'BookmarkID' => $GLOBALS['TSFE']->id,
-													'RootPID' => $GLOBALS['TSFE']->rootLine[0]['uid'],
-													'URLParameter' => '--'.($urlParams).'--' ),
+													'RootPID' => $this->getPidFromRootline(),
+													'URLParameter' => $this->getUrlParameter(true) ),
 											0,
 											1,
 											$this->conf['PIDofBookmarkList']
-											).'&'.$urlParams
+											).'&'.$this->getUrlParameter()
 											) ;
 		}else{
 			
@@ -207,13 +205,13 @@ class tx_mnpagebookmark_controller {
 								tx_mnpagebookmark_div::validateUrl( $this->conf['BookmarkLink.']['externalURL'] ).
 										$this->PiBaseObj->pi_linkTP_keepPIvars_url(	array('submitMode' => 'add', 
 													'PageID' => $GLOBALS['TSFE']->id, 
-													'RootPID' => $GLOBALS['TSFE']->rootLine[0]['uid'],
-													'URLParameter' => '--'.($urlParams).'--' ),
+													'RootPID' => $this->getPidFromRootline(),
+													'URLParameter' => $this->getUrlParameter(true) ),
 											0,
 											1,
 											$this->conf['PIDofBookmarkList']
 											) 
-											.'&'.$urlParams // add for sub pagees
+											.'&'.$this->getUrlParameter() // add for sub pagees
 											.' '.$this->conf['BookmarkLink.']['additionJSParams'] // add for popus
 										);
 		}
@@ -244,6 +242,12 @@ class tx_mnpagebookmark_controller {
 		}
 	}
 	
+	/**
+	 * cut the starting and ending lines and clean up the parameter 
+	 * 
+	 * @param string $param
+	 * @return string
+	 */
 	function validateAdditionURLParameter($param) {
 		
 		//die letzten beiden schriche dummys abmachen
@@ -261,6 +265,37 @@ class tx_mnpagebookmark_controller {
 		return $param;
 	}
 	
+	/**
+	 * get the RootPid from Rootline configured by ts
+	 * 
+	 * @return int
+	 */
+	function getPIdFromRootline() {
+		
+		$i = 0;
+		$returnPid = 1;
+		if (is_array($this->conf['RootPIDs.'])) {
+			foreach ($this->conf['RootPIDs.'] as $pId => $enable ) {
+				
+				if ($GLOBALS['TSFE']->rootLine[$i]['uid'] == $pId && $enable == 1) {
+					$returnPid = $pId;
+				}
+				$i++;
+			}
+		}
+		return $returnPid;
+	}
+	
+	
+	function getUrlParameter($withStartEndingLines = false) {
+		if ($this->conf['URLparamter'] == 1) {
+			if($withStartEndingLines) {
+				return '--' . $_SERVER['QUERY_STRING'] . '--';
+			} else {
+				return $_SERVER['QUERY_STRING'];
+			}
+		}
+	}
 }
 
 ?>

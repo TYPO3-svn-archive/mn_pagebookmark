@@ -363,7 +363,9 @@ class tx_mnpagebookmark_bookmarklist {
 	
 		
 			unset( $this->bookmarks[ $RUID ][ $BookmarkID ][ $parameter ] ); 
-			
+			if(empty($this->bookmarks[ $RUID ][ $BookmarkID ])) {
+				unset($this->bookmarks[ $RUID ][ $BookmarkID ]);
+			}
 			//checks again
 			if( !$this->isBookmarkofRootSite($RUID, $BookmarkID, $parameter)){
 				return true;

@@ -112,8 +112,8 @@ class tx_mnpagebookmark_display {
 		}
 		#debug($newBMList);
 		*/
-		
-		if($this->BookmarkListObj->getBookmarkListCount() > 0 ){
+		$emptySubpart = $GLOBALS['TSFE']->cObj->getSubpart($this->template, '###BOOKMARK_EMPTY###');
+		if($this->BookmarkListObj->getBookmarkListCount() > 0 || empty($emptySubpart)){
 				
 			foreach ($this->BookmarkListObj->getBookmarkList() as $RootPID =>  $BMObjArr) {
 						

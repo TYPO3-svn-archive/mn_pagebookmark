@@ -19,7 +19,7 @@ plugin.tx_mnpagebookmark_pi1{
 	  MoveToPID = 2
 	}
 	
-	
+	URLparamter = 0
 	URLparamter {
 		stdWrap.crop = 58|...
 		1 = RECORDS
