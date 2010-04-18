@@ -68,6 +68,8 @@ class tx_mnpagebookmark_controller {
 		//validation for security
 		$this->validatePostvars();
 		
+		$this->BookMarkList = t3lib_div::makeInstance( 'tx_mnpagebookmark_bookmarklist' );
+				
 	}
 	
 	/**
@@ -80,7 +82,9 @@ class tx_mnpagebookmark_controller {
 				
 		switch( (integer)$mode ){
 			case 1:
+				if(is_numeric($this->conf['PIDofBookmarkList']) && $this->conf['PIDofBookmarkList'] != $GLOBALS['TSFE']->id){
 					$this->controllBookmarks();
+				}
 					$content .= $this->getBookmarkPage_Link();				
 					break;
 			
@@ -98,12 +102,13 @@ class tx_mnpagebookmark_controller {
 	
 	function controllBookmarks(){
 		
-		$this->BookMarkList = t3lib_div::makeInstance( 'tx_mnpagebookmark_bookmarklist' );
 		
-		//saves / delete Bookmarks from List
-		$this->handleBookmarkList();
-		//check Bookmarklist if is the same Bookmarks in DB and in Cookie
-		$this->validateBookmarkList();
+		
+			//saves / delete Bookmarks from List
+			$this->handleBookmarkList();
+			//check Bookmarklist if is the same Bookmarks in DB and in Cookie
+			$this->validateBookmarkList();
+		
 	}
 	
 	/**
@@ -181,10 +186,12 @@ class tx_mnpagebookmark_controller {
 		$urlParams = $_SERVER['QUERY_STRING'];
 		
 		if($this->isPageBookmarked($GLOBALS['TSFE']->id, urldecode($urlParams))
-			||$this->isPageBookmarked($GLOBALS['TSFE']->id, urldecode($this->validateAdditionURLParameter( $this->PiBaseObj->piVars['URLParameter'])))){
+			|| $this->isPageBookmarked($GLOBALS['TSFE']->id, urldecode($this->validateAdditionURLParameter( $this->PiBaseObj->piVars['URLParameter'])))
+			){
 			
 			$this->content .=  $this->PiBaseObj->cObj->getTypoLink($this->PiBaseObj->pi_getLL( 'deleteBookmark' ),
-								$this->PiBaseObj->pi_linkTP_keepPIvars_url(array('submitMode' => 'add', 
+								$this->PiBaseObj->pi_linkTP_keepPIvars_url(array(
+													#'submitMode' => 'add', 
 													'submitMode' => self::DELETE_MODE, 
 													'BookmarkID' => $GLOBALS['TSFE']->id,
 													'RootPID' => $GLOBALS['TSFE']->rootLine[0]['uid'],
